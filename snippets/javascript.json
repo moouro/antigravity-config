@@ -1,0 +1,113 @@
+{
+	"Console Log": {
+		"prefix": "cl",
+		"body": "console.log(${1:'$2'});",
+		"description": "console.log()"
+	},
+	"Console Log Variable": {
+		"prefix": "clv",
+		"body": "console.log('${1:var}:', ${1:var});",
+		"description": "console.log com nome da variável"
+	},
+	"Arrow Function": {
+		"prefix": "af",
+		"body": ["const ${1:name} = (${2:params}) => {", "\t${0}", "};"],
+		"description": "Arrow function"
+	},
+	"Arrow Function Short": {
+		"prefix": "afs",
+		"body": "const ${1:name} = (${2:params}) => ${0};",
+		"description": "Arrow function em uma linha"
+	},
+	"Async Function": {
+		"prefix": "asyncf",
+		"body": [
+			"const ${1:name} = async (${2:params}) => {",
+			"\ttry {",
+			"\t\t${0}",
+			"\t} catch (error) {",
+			"\t\tconsole.error(error);",
+			"\t}",
+			"};"
+		],
+		"description": "Async arrow function com try/catch"
+	},
+	"Fetch API": {
+		"prefix": "fetch",
+		"body": [
+			"const response = await fetch('${1:url}', {",
+			"\tmethod: '${2|GET,POST,PUT,DELETE|}',",
+			"\theaders: {",
+			"\t\t'Content-Type': 'application/json',",
+			"\t},",
+			"\t${3:body: JSON.stringify(${4:data}),}",
+			"});",
+			"const data = await response.json();",
+			"$0"
+		],
+		"description": "Fetch API com headers e body"
+	},
+	"Import Module": {
+		"prefix": "imp",
+		"body": "import ${2:name} from '${1:module}';",
+		"description": "Import ES Module"
+	},
+	"Import Destructured": {
+		"prefix": "impd",
+		"body": "import { ${2:name} } from '${1:module}';",
+		"description": "Import com destructuring"
+	},
+	"DOM Query Selector": {
+		"prefix": "qs",
+		"body": "const ${1:el} = document.querySelector('${2:selector}');",
+		"description": "querySelector"
+	},
+	"DOM Query All": {
+		"prefix": "qsa",
+		"body": "const ${1:els} = document.querySelectorAll('${2:selector}');",
+		"description": "querySelectorAll"
+	},
+	"Event Listener": {
+		"prefix": "ael",
+		"body": [
+			"${1:element}.addEventListener('${2|click,submit,input,change,keydown,keyup,scroll,load,DOMContentLoaded|}', (${3:e}) => {",
+			"\t$0",
+			"});"
+		],
+		"description": "addEventListener"
+	},
+	"DOM Content Loaded": {
+		"prefix": "dcl",
+		"body": [
+			"document.addEventListener('DOMContentLoaded', () => {",
+			"\t$0",
+			"});"
+		],
+		"description": "DOMContentLoaded event"
+	},
+	"For Of Loop": {
+		"prefix": "forof",
+		"body": ["for (const ${1:item} of ${2:array}) {", "\t$0", "}"],
+		"description": "For...of loop"
+	},
+	"Array Map": {
+		"prefix": "map",
+		"body": "${1:array}.map((${2:item}) => ${0});",
+		"description": "Array.map()"
+	},
+	"Array Filter": {
+		"prefix": "filter",
+		"body": "${1:array}.filter((${2:item}) => ${0});",
+		"description": "Array.filter()"
+	},
+	"Destructure Object": {
+		"prefix": "dest",
+		"body": "const { ${2:prop} } = ${1:object};",
+		"description": "Object destructuring"
+	},
+	"Template Literal": {
+		"prefix": "tl",
+		"body": "`${1:text} \\${${2:variable}}`",
+		"description": "Template literal"
+	}
+}

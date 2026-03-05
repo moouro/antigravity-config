@@ -1,0 +1,292 @@
+{
+	"CSS Variables (Intrinsic)": {
+		"prefix": "cssvars",
+		"body": [
+			":root {",
+			"\t/* Cores */",
+			"\t--color-primary: ${1:#6C63FF};",
+			"\t--color-secondary: ${2:#FF6584};",
+			"\t--color-bg: ${3:#0f0f23};",
+			"\t--color-surface: ${4:#1a1a2e};",
+			"\t--color-text: ${5:#e0e0e0};",
+			"\t--color-text-muted: ${6:#a0a0b0};",
+			"",
+			"\t/* Fluid Typography — clamp(min, preferred, max) */",
+			"\t--fs-sm: clamp(0.875rem, 0.8rem + 0.25vw, 1rem);",
+			"\t--fs-base: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);",
+			"\t--fs-lg: clamp(1.25rem, 1rem + 1vw, 1.75rem);",
+			"\t--fs-xl: clamp(1.5rem, 1rem + 2vw, 2.5rem);",
+			"\t--fs-2xl: clamp(2rem, 1.5rem + 2.5vw, 3.5rem);",
+			"",
+			"\t/* Fluid Spacing */",
+			"\t--space-xs: clamp(0.25rem, 0.2rem + 0.25vw, 0.5rem);",
+			"\t--space-sm: clamp(0.5rem, 0.4rem + 0.5vw, 0.75rem);",
+			"\t--space-md: clamp(1rem, 0.8rem + 1vw, 1.5rem);",
+			"\t--space-lg: clamp(1.5rem, 1rem + 2vw, 3rem);",
+			"\t--space-xl: clamp(2rem, 1.5rem + 3vw, 5rem);",
+			"",
+			"\t/* Tipografia */",
+			"\t--font-main: 'Inter', sans-serif;",
+			"\t--font-heading: 'Outfit', sans-serif;",
+			"",
+			"\t/* Bordas */",
+			"\t--radius-sm: 4px;",
+			"\t--radius-md: 8px;",
+			"\t--radius-lg: 16px;",
+			"\t--radius-full: 999px;",
+			"",
+			"\t/* Sombras */",
+			"\t--shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);",
+			"\t--shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);",
+			"\t--shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.2);",
+			"}"
+		],
+		"description": "Design tokens com Fluid Typography e Fluid Spacing usando clamp()"
+	},
+	"CSS Reset": {
+		"prefix": "cssreset",
+		"body": [
+			"*, *::before, *::after {",
+			"\tbox-sizing: border-box;",
+			"\tmargin: 0;",
+			"\tpadding: 0;",
+			"}",
+			"",
+			"html {",
+			"\tfont-size: 16px;",
+			"\tscroll-behavior: smooth;",
+			"}",
+			"",
+			"body {",
+			"\tfont-family: var(--font-main, 'Inter', sans-serif);",
+			"\tline-height: 1.6;",
+			"\tcolor: var(--color-text, #e0e0e0);",
+			"\tbackground: var(--color-bg, #0f0f23);",
+			"\t-webkit-font-smoothing: antialiased;",
+			"}",
+			"",
+			"img, picture, video, canvas, svg {",
+			"\tmax-width: 100%;",
+			"\tdisplay: block;",
+			"}",
+			"",
+			"a {",
+			"\tcolor: inherit;",
+			"\ttext-decoration: none;",
+			"}",
+			"",
+			"ul, ol {",
+			"\tlist-style: none;",
+			"}"
+		],
+		"description": "CSS Reset moderno e completo"
+	},
+	"CSS Flexbox Center": {
+		"prefix": "flexcenter",
+		"body": [
+			"display: flex;",
+			"justify-content: center;",
+			"align-items: center;"
+		],
+		"description": "Centralizar com Flexbox"
+	},
+	"CSS Flex Column": {
+		"prefix": "flexcol",
+		"body": [
+			"display: flex;",
+			"flex-direction: column;",
+			"gap: var(--space-md, ${1:1rem});"
+		],
+		"description": "Flexbox em coluna com gap fluido"
+	},
+	"CSS Grid Intrinsic": {
+		"prefix": "grid",
+		"body": [
+			"display: grid;",
+			"grid-template-columns: repeat(${1:auto-fit}, minmax(min(100%, ${2:280px}), 1fr));",
+			"gap: var(--space-md, ${3:1.5rem});"
+		],
+		"description": "Grid intrinsic responsivo — min(100%, x) evita overflow em telas pequenas"
+	},
+	"CSS Container Intrinsic": {
+		"prefix": "container",
+		"body": [
+			"width: min(100% - ${1:3rem}, ${2:1200px});",
+			"margin-inline: auto;"
+		],
+		"description": "Container intrinsic com min() — substitui max-width + padding + margin"
+	},
+	"CSS Media Query": {
+		"prefix": "mq",
+		"body": ["@media (max-width: ${1:768px}) {", "\t$0", "}"],
+		"description": "Media query responsiva (macro layout)"
+	},
+	"CSS Container Query": {
+		"prefix": "cq",
+		"body": [
+			".${1:parent} {",
+			"\tcontainer-type: inline-size;",
+			"\tcontainer-name: ${2:card};",
+			"}",
+			"",
+			"@container ${2:card} (width < ${3:400px}) {",
+			"\t$0",
+			"}"
+		],
+		"description": "Container query — componentes responsivos ao container, não ao viewport"
+	},
+	"CSS Fluid Text": {
+		"prefix": "fluidtext",
+		"body": [
+			"font-size: clamp(${1:1rem}, ${2:0.5rem + 2vw}, ${3:2rem});"
+		],
+		"description": "Typography fluida com clamp(min, preferido, max)"
+	},
+	"CSS Aspect Ratio": {
+		"prefix": "aspect",
+		"body": [
+			"aspect-ratio: ${1:16} / ${2:9};",
+			"object-fit: ${3:cover};"
+		],
+		"description": "Aspect ratio nativo — substitui hack do padding-top"
+	},
+	"CSS Glassmorphism": {
+		"prefix": "glass",
+		"body": [
+			"background: rgba(${1:255, 255, 255}, ${2:0.05});",
+			"backdrop-filter: blur(${3:12px});",
+			"-webkit-backdrop-filter: blur(${3:12px});",
+			"border: 1px solid rgba(255, 255, 255, 0.1);",
+			"border-radius: var(--radius-lg, 16px);"
+		],
+		"description": "Efeito glassmorphism"
+	},
+	"CSS Transition": {
+		"prefix": "trans",
+		"body": [
+			"transition: ${1:all} ${2:0.3s} ${3:ease-in-out};"
+		],
+		"description": "Transição CSS suave"
+	},
+	"CSS Hover Scale": {
+		"prefix": "hoverscale",
+		"body": [
+			"transition: transform 0.3s ease;",
+			"",
+			"&:hover {",
+			"\ttransform: scale(${1:1.05});",
+			"}"
+		],
+		"description": "Efeito hover com scale"
+	},
+	"A11Y: Screen Reader Only": {
+		"prefix": "sr-only",
+		"body": [
+			".sr-only {",
+			"\tposition: absolute;",
+			"\twidth: 1px;",
+			"\theight: 1px;",
+			"\tpadding: 0;",
+			"\tmargin: -1px;",
+			"\toverflow: hidden;",
+			"\tclip: rect(0, 0, 0, 0);",
+			"\twhite-space: nowrap;",
+			"\tborder-width: 0;",
+			"}"
+		],
+		"description": "A11Y — Oculta visualmente mas mantém acessível para leitores de tela"
+	},
+	"A11Y: Focus Visible": {
+		"prefix": "focus-visible",
+		"body": [
+			"&:focus-visible {",
+			"\toutline: 2px solid ${1:var(--color-primary, #6C63FF)};",
+			"\toutline-offset: 2px;",
+			"}"
+		],
+		"description": "A11Y — Indicador de foco visível para navegação por teclado"
+	},
+	"A11Y: Reduced Motion": {
+		"prefix": "reduced-motion",
+		"body": [
+			"@media (prefers-reduced-motion: reduce) {",
+			"\t*, *::before, *::after {",
+			"\t\tanimation-duration: 0.01ms !important;",
+			"\t\tanimation-iteration-count: 1 !important;",
+			"\t\ttransition-duration: 0.01ms !important;",
+			"\t\tscroll-behavior: auto !important;",
+			"\t}",
+			"}"
+		],
+		"description": "A11Y — Desativa animações para usuários que preferem movimento reduzido"
+	},
+	"A11Y: Skip to Content Link": {
+		"prefix": "skip-link",
+		"body": [
+			".skip-link {",
+			"\tposition: absolute;",
+			"\ttop: -100%;",
+			"\tleft: 50%;",
+			"\ttransform: translateX(-50%);",
+			"\tpadding: var(--space-sm, 0.5rem) var(--space-md, 1rem);",
+			"\tbackground: var(--color-primary, #6C63FF);",
+			"\tcolor: #fff;",
+			"\tborder-radius: 0 0 var(--radius-md, 8px) var(--radius-md, 8px);",
+			"\tz-index: 9999;",
+			"\ttransition: top 0.2s ease;",
+			"}",
+			"",
+			".skip-link:focus {",
+			"\ttop: 0;",
+			"}"
+		],
+		"description": "A11Y — Link 'Pular para conteúdo' que aparece no foco via teclado (Tab)"
+	},
+	"A11Y: Color Scheme": {
+		"prefix": "color-scheme",
+		"body": [
+			"@media (prefers-color-scheme: dark) {",
+			"\t:root {",
+			"\t\t--color-bg: ${1:#0f0f23};",
+			"\t\t--color-surface: ${2:#1a1a2e};",
+			"\t\t--color-text: ${3:#e0e0e0};",
+			"\t}",
+			"}",
+			"",
+			"@media (prefers-color-scheme: light) {",
+			"\t:root {",
+			"\t\t--color-bg: ${4:#f5f5f5};",
+			"\t\t--color-surface: ${5:#ffffff};",
+			"\t\t--color-text: ${6:#1a1a2e};",
+			"\t}",
+			"}"
+		],
+		"description": "A11Y — Tema claro/escuro automático baseado na preferência do sistema"
+	},
+	"A11Y: High Contrast": {
+		"prefix": "high-contrast",
+		"body": [
+			"@media (prefers-contrast: high) {",
+			"\t:root {",
+			"\t\t--color-text: #000;",
+			"\t\t--color-bg: #fff;",
+			"\t\t--color-primary: #0000ee;",
+			"\t}",
+			"",
+			"\t*, *::before, *::after {",
+			"\t\tborder-color: currentColor !important;",
+			"\t}",
+			"}"
+		],
+		"description": "A11Y — Suporte a modo de alto contraste para usuários com baixa visão"
+	},
+	"A11Y: Touch Target": {
+		"prefix": "touch-target",
+		"body": [
+			"min-width: 44px;",
+			"min-height: 44px;",
+			"/* WCAG 2.5.8 — tamanho mínimo de 44x44px para alvos de toque */"
+		],
+		"description": "A11Y — Tamanho mínimo de toque (WCAG 2.5.8) para botões e links"
+	}
+}

@@ -1,0 +1,201 @@
+{
+	"HTML5 Boilerplate": {
+		"prefix": "html5",
+		"body": [
+			"<!DOCTYPE html>",
+			"<html lang=\"pt-BR\">",
+			"<head>",
+			"\t<meta charset=\"UTF-8\">",
+			"\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">",
+			"\t<meta name=\"description\" content=\"${2:Descrição da página}\">",
+			"\t<title>${1:Título}</title>",
+			"\t<link rel=\"stylesheet\" href=\"${3:style.css}\">",
+			"</head>",
+			"<body>",
+			"\t$0",
+			"\t<script src=\"${4:script.js}\"></script>",
+			"</body>",
+			"</html>"
+		],
+		"description": "Estrutura HTML5 completa com meta tags SEO"
+	},
+	"HTML Section": {
+		"prefix": "section",
+		"body": [
+			"<section id=\"${1:section-name}\" class=\"${2:section}\">",
+			"\t<div class=\"container\">",
+			"\t\t<h2>${3:Título da Seção}</h2>",
+			"\t\t$0",
+			"\t</div>",
+			"</section>"
+		],
+		"description": "Seção HTML semântica com container"
+	},
+	"HTML Nav": {
+		"prefix": "navbar",
+		"body": [
+			"<nav class=\"${1:navbar}\">",
+			"\t<div class=\"container\">",
+			"\t\t<a href=\"/\" class=\"logo\">${2:Logo}</a>",
+			"\t\t<ul class=\"nav-links\">",
+			"\t\t\t<li><a href=\"#${3:home}\">${4:Home}</a></li>",
+			"\t\t\t<li><a href=\"#${5:about}\">${6:Sobre}</a></li>",
+			"\t\t\t<li><a href=\"#${7:contact}\">${8:Contato}</a></li>",
+			"\t\t</ul>",
+			"\t</div>",
+			"</nav>"
+		],
+		"description": "Barra de navegação HTML"
+	},
+	"HTML Card": {
+		"prefix": "card",
+		"body": [
+			"<div class=\"card\">",
+			"\t<img src=\"${1:image.jpg}\" alt=\"${2:descrição}\">",
+			"\t<div class=\"card-body\">",
+			"\t\t<h3>${3:Título}</h3>",
+			"\t\t<p>${4:Descrição do card}</p>",
+			"\t\t<a href=\"${5:#}\" class=\"btn\">${6:Saiba mais}</a>",
+			"\t</div>",
+			"</div>"
+		],
+		"description": "Card HTML com imagem e botão"
+	},
+	"HTML Form": {
+		"prefix": "form",
+		"body": [
+			"<form action=\"${1:#}\" method=\"${2:POST}\" id=\"${3:form}\">",
+			"\t<div class=\"form-group\">",
+			"\t\t<label for=\"${4:name}\">${5:Nome}</label>",
+			"\t\t<input type=\"text\" id=\"${4:name}\" name=\"${4:name}\" required>",
+			"\t</div>",
+			"\t<div class=\"form-group\">",
+			"\t\t<label for=\"${6:email}\">${7:E-mail}</label>",
+			"\t\t<input type=\"email\" id=\"${6:email}\" name=\"${6:email}\" required>",
+			"\t</div>",
+			"\t<button type=\"submit\" class=\"btn\">${8:Enviar}</button>",
+			"</form>"
+		],
+		"description": "Formulário HTML com campos e validação"
+	},
+	"HTML Footer": {
+		"prefix": "footer",
+		"body": [
+			"<footer class=\"${1:footer}\">",
+			"\t<div class=\"container\">",
+			"\t\t<p>&copy; ${CURRENT_YEAR} ${2:Nome}. Todos os direitos reservados.</p>",
+			"\t</div>",
+			"</footer>"
+		],
+		"description": "Footer com copyright dinâmico"
+	},
+	"CSS Variables": {
+		"prefix": "cssvars",
+		"body": [
+			":root {",
+			"\t/* Cores */",
+			"\t--color-primary: ${1:#6C63FF};",
+			"\t--color-secondary: ${2:#FF6584};",
+			"\t--color-bg: ${3:#0f0f23};",
+			"\t--color-surface: ${4:#1a1a2e};",
+			"\t--color-text: ${5:#e0e0e0};",
+			"\t--color-text-muted: ${6:#a0a0b0};",
+			"",
+			"\t/* Tipografia */",
+			"\t--font-main: 'Inter', sans-serif;",
+			"\t--font-heading: 'Outfit', sans-serif;",
+			"",
+			"\t/* Espaçamento */",
+			"\t--space-xs: 0.25rem;",
+			"\t--space-sm: 0.5rem;",
+			"\t--space-md: 1rem;",
+			"\t--space-lg: 2rem;",
+			"\t--space-xl: 4rem;",
+			"",
+			"\t/* Bordas */",
+			"\t--radius-sm: 4px;",
+			"\t--radius-md: 8px;",
+			"\t--radius-lg: 16px;",
+			"\t--radius-full: 999px;",
+			"",
+			"\t/* Sombras */",
+			"\t--shadow-sm: 0 1px 3px rgba(0,0,0,0.12);",
+			"\t--shadow-md: 0 4px 12px rgba(0,0,0,0.15);",
+			"\t--shadow-lg: 0 8px 30px rgba(0,0,0,0.2);",
+			"}"
+		],
+		"description": "Design tokens CSS com cores, tipografia e espaçamento"
+	},
+	"CSS Reset": {
+		"prefix": "cssreset",
+		"body": [
+			"*, *::before, *::after {",
+			"\tbox-sizing: border-box;",
+			"\tmargin: 0;",
+			"\tpadding: 0;",
+			"}",
+			"",
+			"html {",
+			"\tfont-size: 16px;",
+			"\tscroll-behavior: smooth;",
+			"}",
+			"",
+			"body {",
+			"\tfont-family: var(--font-main, 'Inter', sans-serif);",
+			"\tline-height: 1.6;",
+			"\tcolor: var(--color-text, #e0e0e0);",
+			"\tbackground: var(--color-bg, #0f0f23);",
+			"\t-webkit-font-smoothing: antialiased;",
+			"}",
+			"",
+			"img, picture, video, canvas, svg {",
+			"\tmax-width: 100%;",
+			"\tdisplay: block;",
+			"}",
+			"",
+			"a {",
+			"\tcolor: inherit;",
+			"\ttext-decoration: none;",
+			"}",
+			"",
+			"ul, ol {",
+			"\tlist-style: none;",
+			"}"
+		],
+		"description": "CSS Reset moderno e completo"
+	},
+	"CSS Flexbox Center": {
+		"prefix": "flexcenter",
+		"body": [
+			"display: flex;",
+			"justify-content: center;",
+			"align-items: center;"
+		],
+		"description": "Centralizar com Flexbox"
+	},
+	"CSS Grid Layout": {
+		"prefix": "grid",
+		"body": [
+			"display: grid;",
+			"grid-template-columns: repeat(${1:auto-fit}, minmax(${2:280px}, 1fr));",
+			"gap: ${3:1.5rem};"
+		],
+		"description": "Grid responsivo auto-fit"
+	},
+	"CSS Media Query": {
+		"prefix": "mq",
+		"body": ["@media (max-width: ${1:768px}) {", "\t$0", "}"],
+		"description": "Media query responsiva"
+	},
+	"CSS Glassmorphism": {
+		"prefix": "glass",
+		"body": [
+			"background: rgba(${1:255, 255, 255}, ${2:0.05});",
+			"backdrop-filter: blur(${3:12px});",
+			"-webkit-backdrop-filter: blur(${3:12px});",
+			"border: 1px solid rgba(255, 255, 255, 0.1);",
+			"border-radius: var(--radius-lg, 16px);"
+		],
+		"description": "Efeito glassmorphism"
+	}
+}
