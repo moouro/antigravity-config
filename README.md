@@ -16,11 +16,9 @@ Configurações do [Google Antigravity](https://developers.google.com/antigravit
 ### 1. Clone o repositório
 
 ```bash
-git clone https://github.com/<SEU-USUARIO>/antigravity-config.git
+git clone https://github.com/moouro/antigravity-config.git
 cd antigravity-config
 ```
-
-> **Nota:** Substitua `<SEU-USUARIO>` pelo seu username do GitHub.
 
 ### 2. Restaurar (aplicar configs ao Antigravity)
 
