@@ -10,5 +10,13 @@ Desktop.ini
 .vscode/
 .idea/
 
+# Temporários
+*.bak
+*.tmp
+*.log
+
+# Backups gerados pelo restore
+.backup/
+
 # Node (caso tenha algo)
 node_modules/

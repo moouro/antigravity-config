@@ -1,0 +1,5 @@
+# Forçar LF nos scripts Bash para evitar erros \r no Linux/macOS
+*.sh text eol=lf
+
+# Manter CRLF padrão nos scripts PowerShell (Windows)
+*.ps1 text eol=crlf
