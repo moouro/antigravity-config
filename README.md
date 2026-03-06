@@ -2,6 +2,8 @@
 
 Configurações do [Google Antigravity](https://antigravity.google/) — settings, snippets e atalhos, prontas para usar em qualquer máquina.
 
+> 🌐 **[Ver todos os snippets no site →](https://moouro.github.io/antigravity-config)**
+
 ## 📦 O que contém
 
 | Arquivo | Descrição |
