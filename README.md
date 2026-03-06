@@ -1,6 +1,6 @@
 # 🚀 Antigravity Config
 
-Configurações do [Google Antigravity](https://developers.google.com/antigravity) — settings, snippets e atalhos, prontas para usar em qualquer máquina.
+Configurações do [Google Antigravity](https://antigravity.google/) — settings, snippets e atalhos, prontas para usar em qualquer máquina.
 
 ## 📦 O que contém
 
