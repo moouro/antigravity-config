@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+      content="Antigravity Snippets — 49 snippets de CSS, HTML e JavaScript criados por mouro.dev para o Google Antigravity. Clone, restaure e comece a codar.">
+    <title>Antigravity Snippets — CSS, HTML & JS para seu editor</title>
+
+    <!-- Open Graph / Twitter -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Antigravity Snippets — CSS, HTML & JS para seu editor">
+    <meta property="og:description"
+      content="49 snippets de CSS, HTML e JavaScript criados por mouro.dev para o Google Antigravity. Clone, restaure e comece a codar.">
+    <meta property="og:url" content="https://github.com/moouro/antigravity-config">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Antigravity Snippets — CSS, HTML & JS">
+    <meta name="twitter:description"
+      content="49 snippets de CSS, HTML e JavaScript — clone, restaure e comece a codar.">
+    <link rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+
+    <!-- Skip to Content -->
+    <a href="#main" class="skip-link">Pular para o conteúdo</a>
+
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+      <div class="container nav-inner">
+        <a href="#hero" class="nav-logo">
+          <span class="logo-icon">🚀</span>
+          <span>Antigravity<span class="logo-accent">Snippets</span></span>
+        </a>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="#por-que" class="nav-link">Por quê?</a></li>
+          <li><a href="#snippets-css" class="nav-link">CSS</a></li>
+          <li><a href="#snippets-html" class="nav-link">HTML</a></li>
+          <li><a href="#snippets-js" class="nav-link">JS</a></li>
+          <li><a href="#install" class="nav-link">Instalação</a></li>
+          <li>
+            <a href="https://github.com/moouro/antigravity-config" target="_blank" rel="noopener"
+              class="nav-link nav-github">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <title>GitHub</title>
+                <path
+                  d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+              </svg>
+              GitHub
+            </a>
+          </li>
+        </ul>
+        <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Abrir menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero" id="hero">
+      <div class="hero-glow"></div>
+      <div class="container">
+        <div class="hero-badge">🚀 49 snippets prontos para clonar e usar</div>
+        <h1 class="hero-title">Antigravity Snippets</h1>
+        <p class="hero-subtitle">Uma coleção de snippets em CSS, HTML e JavaScript criada para o Google Antigravity. A
+          proposta é oferecer soluções práticas e reutilizáveis que ajudam desenvolvedores a otimizar tempo, manter
+          consistência no código e acelerar o processo de desenvolvimento. Cada snippet foi pensado para ser simples de
+          integrar, fácil de adaptar e seguir boas práticas, garantindo desempenho e qualidade em qualquer projeto web.
+        </p>
+
+        <div class="hero-search-wrap">
+          <div class="search-box">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-text-muted);" aria-hidden="true">
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+            <label for="search-input" class="sr-only">Buscar snippets</label>
+            <input type="text" id="search-input" class="search-input"
+              placeholder="Buscar snippets... ex: grid, fetch, glass" autocomplete="off" aria-label="Buscar snippets">
+            <kbd class="search-kbd">Ctrl+K</kbd>
+          </div>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat">
+            <span class="stat-number">20</span>
+            <span class="stat-label">CSS</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">12</span>
+            <span class="stat-label">HTML</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">17</span>
+            <span class="stat-label">JS</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main">
+
+      <!-- Por que isso existe? -->
+      <section id="por-que" class="origin-section">
+        <div class="container">
+          <h2 class="section-title">Por que esse projeto existe?</h2>
+          <div class="origin-content">
+            <p>Se você usa o Google Antigravity, sabe que ele <strong>não tem Settings Sync</strong>. Formata a máquina?
+              Troca de computador? Lá se vão todos os seus snippets, keybindings e configurações do editor.</p>
+            <p>O <strong>antigravity-config</strong> nasceu da minha frustração com isso. Eu queria uma forma simples de
+              carregar meus snippets e configs em qualquer setup novo — sem precisar reconfigurar tudo do zero, sem
+              copiar arquivo por arquivo.</p>
+            <p>A solução foi colocar tudo num <strong>repositório Git</strong>: 49 snippets de CSS, HTML e JavaScript
+              que eu uso no dia a dia, mais um script que restaura tudo com um único comando. Clona, roda o script, e
+              pronto — seu editor tá configurado.</p>
+            <p>Decidi abrir o projeto porque pode ser útil pra mais gente. Mesmo que você não use todos os snippets,
+              pode clonar o repo e <strong>adaptar à sua forma de trabalhar</strong>.</p>
+            <p class="origin-author">— <a href="https://mouro.dev" target="_blank" rel="noopener">mouro.dev</a></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- CSS Snippets -->
+      <section id="snippets-css" class="snippets-section">
+        <div class="container">
+          <div class="section-header">
+            <h2 class="section-title gradient-text">CSS Snippets <span
+                style="color:var(--color-primary); font-size:1rem; vertical-align:middle;">(20)</span></h2>
+          </div>
+          <div class="snippets-grid" id="css-grid">
+            <!-- JS renders cards here -->
+          </div>
+        </div>
+      </section>
+
+      <!-- HTML Snippets -->
+      <section id="snippets-html" class="snippets-section">
+        <div class="container">
+          <div class="section-header">
+            <h2 class="section-title gradient-text">HTML Snippets <span
+                style="color:var(--color-html); font-size:1rem; vertical-align:middle;">(12)</span></h2>
+          </div>
+          <div class="snippets-grid" id="html-grid">
+            <!-- JS renders cards here -->
+          </div>
+        </div>
+      </section>
+
+      <!-- JS Snippets -->
+      <section id="snippets-js" class="snippets-section">
+        <div class="container">
+          <div class="section-header">
+            <h2 class="section-title gradient-text">JavaScript Snippets <span
+                style="color:var(--color-js); font-size:1rem; vertical-align:middle;">(17)</span></h2>
+          </div>
+          <div class="snippets-grid" id="js-grid">
+            <!-- JS renders cards here -->
+          </div>
+        </div>
+      </section>
+
+      <div class="no-results" id="no-results" hidden>
+        <p>Nenhum snippet encontrado para a sua busca.</p>
+      </div>
+
+      <!-- Install Section (Terminal Style) -->
+      <section id="install" class="install-section">
+        <div class="container">
+          <h2 class="section-title">Como Instalar</h2>
+          <p class="section-desc">Instalação via terminal elegante em 3 passos</p>
+
+          <div class="install-grid">
+            <!-- Step 1 -->
+            <div class="terminal-window">
+              <div class="terminal-header">
+                <div class="term-dot r"></div>
+                <div class="term-dot y"></div>
+                <div class="term-dot g"></div>
+                <span class="term-title">bash</span>
+              </div>
+              <div class="terminal-body">
+                <div class="step-title"><span>1</span> Clone repo</div>
+                <div class="code-block">
+                  <button type="button" class="copy-btn" data-code="git clone https://github.com/moouro/antigravity-config.git
+cd antigravity-config">Copy</button>
+                  <pre>git clone https://github.com/moouro/antigravity-config.git
+cd antigravity-config</pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="terminal-window">
+              <div class="terminal-header">
+                <div class="term-dot r"></div>
+                <div class="term-dot y"></div>
+                <div class="term-dot g"></div>
+                <span class="term-title">powershell</span>
+              </div>
+              <div class="terminal-body">
+                <div class="step-title"><span>2</span> Restaurar</div>
+                <div class="code-block">
+                  <button type="button" class="copy-btn" data-code=".\scripts\restore.ps1">Copy</button>
+                  <pre>.\scripts\restore.ps1</pre>
+                </div>
+                <div class="step-desc">Faz backup automático das configs atuais.</div>
+              </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="terminal-window">
+              <div class="terminal-header">
+                <div class="term-dot r"></div>
+                <div class="term-dot y"></div>
+                <div class="term-dot g"></div>
+                <span class="term-title">mouro.dev</span>
+              </div>
+              <div class="terminal-body">
+                <div class="step-title"><span>3</span> Use</div>
+                <div class="step-desc">
+                  Digite o prefixo (ex: <code>grid</code>, <code>fetch</code>) e
+                  pressione <kbd>Tab</kbd> no seu editor.
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container footer-inner">
+        <div>
+          &copy; 2026 <strong>Antigravity Snippets</strong>. Design e desenvolvimento por <a href="https://mouro.dev"
+            target="_blank" rel="noopener">mouro.dev</a>
+        </div>
+        <a href="https://github.com/moouro/antigravity-config" target="_blank" rel="noopener">Ver código no GitHub</a>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+
+</html>
