@@ -89,6 +89,18 @@ echo ""
 if [ "$count" -eq 0 ]; then
     echo "Nenhum arquivo encontrado para backup."
 else
+    if [ -f "$SCRIPT_DIR/sync-docs.py" ]; then
+        if command -v python3 >/dev/null 2>&1; then
+            if python3 "$SCRIPT_DIR/sync-docs.py" >/dev/null; then
+                echo "  [OK] docs/snippets-data.js sincronizado"
+            else
+                echo "  [--] falha ao executar sync-docs.py, continuando"
+            fi
+        else
+            echo "  [--] python3 nao encontrado, pulando sync-docs.py"
+        fi
+    fi
+    echo ""
     echo "Backup concluido! ($count arquivo(s) copiados)"
     echo ""
     echo "Agora faca commit e push:"

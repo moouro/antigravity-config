@@ -1,4 +1,4 @@
-# ============================================================
+﻿# ============================================================
 # Antigravity Config Backup (Windows)
 # Copia configs do Antigravity para este repositório
 # ============================================================
@@ -80,6 +80,22 @@ Write-Host ""
 if ($count -eq 0) {
     Write-Host "Nenhum arquivo encontrado para backup." -ForegroundColor Yellow
 } else {
+    $syncScript = Join-Path $SCRIPT_DIR "sync-docs.py"
+    if (Test-Path $syncScript) {
+        $pyCmd = Get-Command python -ErrorAction SilentlyContinue
+        if (-not $pyCmd) { $pyCmd = Get-Command py -ErrorAction SilentlyContinue }
+        if ($pyCmd) {
+            & $pyCmd.Source $syncScript | Out-Null
+            if ($LASTEXITCODE -eq 0) {
+                Write-Host "  [OK] docs/snippets-data.js sincronizado" -ForegroundColor Green
+            } else {
+                Write-Host "  [--] falha ao executar sync-docs.py, continuando" -ForegroundColor Yellow
+            }
+        } else {
+            Write-Host "  [--] python nao encontrado, pulando sync-docs.py" -ForegroundColor Yellow
+        }
+    }
+    Write-Host ""
     Write-Host "Backup concluido! ($count arquivo(s) copiados)" -ForegroundColor Green
     Write-Host ""
     Write-Host "Agora faca commit e push:" -ForegroundColor Cyan
