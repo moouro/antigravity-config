@@ -1,41 +1,56 @@
-# 🚀 Antigravity Config
+# Antigravity Front-End Kit
 
-Configurações do [Google Antigravity](https://antigravity.google/) — settings, snippets e atalhos, prontas para usar em qualquer máquina.
+**Rules, Skills, Agents e 49 snippets** de Intrinsic CSS, acessibilidade WCAG, HTML semântico e JavaScript para criar interfaces autorais no [Google Antigravity](https://antigravity.google/) — sem estética genérica de template de IA.
 
-> 🌐 **[Ver todos os snippets no site →](https://moouro.github.io/antigravity-config)**
+> **[Explorar o catálogo web e copiar em 1 clique →](https://moouro.github.io/antigravity-config)**
 
-## 📦 O que contém
+## O que contém
 
-| Arquivo | Descrição |
+### Kit Agêntico (`.agent/`)
+
+| Tipo | Arquivo | Gatilho | Propósito |
+|---|---|---|---|
+| **Rule** | `.agent/rules/global-standards.md` | `alwaysApply` | Diretrizes globais anti-"cara de IA", HTML semântico, Intrinsic Web Design e WCAG |
+| **Skill** | `.agent/skills/autoral-ui/SKILL.md` | `/autoral-ui` | Processo estruturado para criar ou refatorar interfaces com direção de arte autoral |
+| **Skill** | `.agent/skills/anti-ai-writing/SKILL.md` | `/anti-ai-writing` | Escreve, reescreve e audita textos removendo sinais de escrita por IA (`WP:AISIGNS`) |
+| **Agent** | `.agent/agents/ui-reviewer.md` | `@ui-reviewer` | Revisor de UI/CSS/HTML focado em contraste, tipografia e substituição de media queries rígidas |
+
+### Snippets & Configurações do Editor
+
+| Arquivo | Conteúdo |
 |---|---|
-| `settings.json` | Configurações do editor (Biome, fonte, formatação, Emmet) |
-| `snippets/css.json` | 20 snippets CSS (Intrinsic Design + Acessibilidade WCAG) |
-| `snippets/html.json` | 12 snippets HTML (boilerplate, navbar, card, form…) |
-| `snippets/javascript.json` | 17 snippets JS (arrow functions, fetch, DOM…) |
+| `snippets/css.json` | 20 snippets CSS (Intrinsic Design + 7 de acessibilidade WCAG `a11y`) |
+| `snippets/html.json` | 12 snippets HTML (boilerplate, seções semânticas e CSS inline) |
+| `snippets/javascript.json` | 17 snippets JS (console, arrow/async functions, fetch, imports, DOM, loops/arrays) |
+| `settings.json` | Configurações opcionais de editor (tema, fontes, Emmet, formatação) |
+| `scripts/sync-docs.py` | Sincroniza `.agent/**/*` e `snippets/*.json` → `docs/snippets-data.js` |
 
-## 🔧 Como usar
+## Como usar
 
-### 1. Clone o repositório
+### Opção 1 — Copiar direto do catálogo (sem instalar nada)
+
+Acesse **[moouro.github.io/antigravity-config](https://moouro.github.io/antigravity-config)**, filtre por **Kit Agêntico**, **CSS**, **HTML**, **JS** ou **a11y**, e copie qualquer Rule, Skill, Agent ou snippet em 1 clique.
+
+### Opção 2 — Clonar e restaurar o setup completo
 
 ```bash
 git clone https://github.com/moouro/antigravity-config.git
 cd antigravity-config
 ```
 
-### 2. Restaurar (aplicar configs ao Antigravity)
+**Restaurar snippets e settings (faz backup automático em `.backup/`):**
 
 ```bash
 # Windows (PowerShell)
 .\scripts\restore.ps1
 
 # Linux / macOS
-chmod +x scripts/restore.sh   # só na primeira vez
-./scripts/restore.sh
+chmod +x scripts/restore.sh && ./scripts/restore.sh
 ```
 
-O script faz **backup automático** das suas configs atuais antes de sobrescrever (salvo em `.backup/`).
+**Ativar o Kit Agêntico no seu projeto:** copie a pasta `.agent/` para a raiz do projeto alvo (ou copie apenas os arquivos desejados).
 
-### 3. Backup (salvar configs atuais no repo)
+**Fazer backup das configs do editor e sincronizar o catálogo:**
 
 ```bash
 # Windows (PowerShell)
@@ -45,40 +60,22 @@ O script faz **backup automático** das suas configs atuais antes de sobrescreve
 ./scripts/backup.sh
 ```
 
-Depois faça commit:
+## Caminhos suportados por SO
 
-```bash
-git add -A && git commit -m "atualizar configs" && git push
-```
+Os scripts detectam automaticamente diretórios do **Antigravity IDE 2.0+** (`Antigravity IDE/User`) e o caminho legado (`Antigravity/User`):
 
-## 📍 Caminhos por SO
-
-| SO | Caminho do Antigravity |
+| SO | Caminhos verificados |
 |---|---|
-| Windows | `%APPDATA%\Antigravity\User\` |
-| macOS | `~/Library/Application Support/Antigravity/User/` |
-| Linux | `~/.config/Antigravity/User/` |
+| Windows | `%APPDATA%\Antigravity IDE\User\` ou `%APPDATA%\Antigravity\User\` |
+| macOS | `~/Library/Application Support/Antigravity IDE/User/` ou `.../Antigravity/User/` |
+| Linux | `~/.config/Antigravity IDE/User/` ou `~/.config/Antigravity/User/` |
 
-## ⚠️ Pré-requisitos
+## Pré-requisitos opcionais
 
 - **Google Antigravity** instalado
-- **Extensão Biome** instalada no Antigravity (os snippets funcionam sem, mas o formatter precisa)
-- **Fontes** (opcional): `Maple Mono` e `Cascadia Code`. Se não tiver, o editor usará `Consolas` ou `monospace` como fallback
+- **Python 3** (apenas para rodar `scripts/sync-docs.py` ao editar snippets ou `.agent/`)
+- **Formatter** (opcional): `settings.json` usa Biome, mas as regras do Kit Agêntico são agnósticas de formatter (funcionam com Biome, Prettier ou padrão do editor)
 
-## 📋 Snippets disponíveis
+## Licença
 
-### CSS (prefixo → Tab)
-
-`cssvars` · `cssreset` · `flexcenter` · `flexcol` · `grid` · `container` · `mq` · `cq` · `fluidtext` · `aspect` · `glass` · `trans` · `hoverscale` · `sr-only` · `focus-visible` · `reduced-motion` · `skip-link` · `color-scheme` · `high-contrast` · `touch-target`
-
-### HTML (prefixo → Tab)
-
-`html5` · `section` · `navbar` · `card` · `form` · `footer` · `cssvars` · `cssreset` · `flexcenter` · `grid` · `mq` · `glass`
-
-### JavaScript (prefixo → Tab)
-
-`cl` · `clv` · `af` · `afs` · `asyncf` · `fetch` · `imp` · `impd` · `qs` · `qsa` · `ael` · `dcl` · `forof` · `map` · `filter` · `dest` · `tl`
-
-## 📄 Licença
-
-Uso livre. Sinta-se à vontade para fazer fork e adaptar.
+Uso livre. Sinta-se à vontade para copiar, adaptar ou fazer fork — feito por [mouro.dev](https://mouro.dev).

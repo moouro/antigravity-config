@@ -5,20 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-      content="Antigravity Snippets — 49 snippets de CSS, HTML e JavaScript criados por mouro.dev para o Google Antigravity. Clone, restaure e comece a codar.">
+      content="Antigravity Front-End Kit — Rules, Skills, Agents e 49 snippets de Intrinsic CSS, HTML, JS e a11y criados por mouro.dev para o Google Antigravity.">
     <meta name="theme-color" content="#121214">
-    <title>Antigravity Snippets — CSS, HTML &amp; JS para seu editor</title>
+    <title>Antigravity Front-End Kit — Rules, Skills, Agents &amp; Snippets</title>
 
     <!-- Open Graph / Twitter -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Antigravity Snippets — CSS, HTML &amp; JS para seu editor">
+    <meta property="og:title" content="Antigravity Front-End Kit — Rules, Skills, Agents &amp; Snippets">
     <meta property="og:description"
-      content="49 snippets de CSS, HTML e JavaScript criados por mouro.dev para o Google Antigravity. Clone, restaure e comece a codar.">
-    <meta property="og:url" content="https://github.com/moouro/antigravity-config">
+      content="Rules, Skills, Agents e 49 snippets de Intrinsic CSS, HTML, JS e a11y para interfaces autorais e acessíveis no Google Antigravity.">
+    <meta property="og:url" content="https://moouro.github.io/antigravity-config">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Antigravity Snippets — CSS, HTML &amp; JS">
+    <meta name="twitter:title" content="Antigravity Front-End Kit — mouro.dev">
     <meta name="twitter:description"
-      content="49 snippets de CSS, HTML e JavaScript — clone, restaure e comece a codar.">
+      content="Rules, Skills, Agents e 49 snippets de CSS, HTML e JS prontos para copiar no Google Antigravity.">
     <link rel="icon"
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2318181B'/%3E%3Crect x='.5' y='.5' width='31' height='31' rx='6.5' fill='none' stroke='%2327272A'/%3E%3Ctext x='16' y='21' font-family='monospace' font-size='14' font-weight='600' text-anchor='middle' fill='%23F4F4F5'%3E%7B%7D%3C/text%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,14 +37,15 @@
     <!-- Navbar -->
     <nav class="navbar" id="navbar" aria-label="Principal">
       <div class="container nav-inner">
-        <a href="#hero" class="nav-logo" aria-label="Antigravity Snippets — início">
-          <span>antigravity</span><span class="logo-path">/snippets</span>
+        <a href="#hero" class="nav-logo" aria-label="Antigravity Front-End Kit — início">
+          <span>antigravity</span><span class="logo-path">/frontend-kit</span>
         </a>
         <ul class="nav-links" id="nav-links">
+          <li><a href="#kit-agentico" class="nav-link">Kit Agêntico</a></li>
           <li><a href="#snippets-css" class="nav-link">CSS</a></li>
           <li><a href="#snippets-html" class="nav-link">HTML</a></li>
           <li><a href="#snippets-js" class="nav-link">JS</a></li>
-          <li><a href="#por-que" class="nav-link">Por quê?</a></li>
+          <li><a href="#por-que" class="nav-link">Sobre</a></li>
           <li><a href="#install" class="nav-link">Instalação</a></li>
           <li>
             <a href="https://github.com/moouro/antigravity-config" target="_blank" rel="noopener"
@@ -68,22 +69,23 @@
     <header class="hero" id="hero">
       <div class="container">
         <p class="hero-meta">
-          <span data-total-label>49 snippets</span><span>css, html, js</span><span>google antigravity</span>
+          <span data-total-label>53 recursos</span><span>rules, skills, agents &amp; snippets</span><span>google antigravity</span>
         </p>
-        <h1 class="hero-title">Antigravity Snippets</h1>
-        <p class="hero-subtitle">Snippets de CSS, HTML e JavaScript para o Google Antigravity. Digite o prefixo,
-          pressione <kbd>Tab</kbd> e siga codando.</p>
+        <h1 class="hero-title">Antigravity Front-End Kit</h1>
+        <p class="hero-subtitle">Rules, Skills, Agents e snippets de Intrinsic CSS, HTML e JS para criar interfaces
+          autorais e acessíveis no Google Antigravity — sem estética genérica de IA.</p>
 
-        <search class="hero-search-wrap" aria-label="Filtrar snippets">
+        <search class="hero-search-wrap" aria-label="Filtrar recursos do kit">
           <div class="search-box">
             <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
               stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <circle cx="11" cy="11" r="7" />
               <line x1="20" y1="20" x2="16.65" y2="16.65" />
             </svg>
-            <label for="search-input" class="sr-only">Buscar snippets</label>
+            <label for="search-input" class="sr-only">Buscar recursos e snippets</label>
             <input type="search" id="search-input" class="search-input"
-              placeholder="Buscar snippets — grid, fetch, glass…" autocomplete="off" enterkeyhint="search">
+              placeholder="Buscar rules, skills ou snippets — autoral-ui, grid, a11y…" autocomplete="off"
+              enterkeyhint="search">
             <button type="button" id="search-clear" class="search-clear" aria-label="Limpar busca" hidden>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -97,7 +99,9 @@
 
         <div class="filter-bar" role="group" aria-label="Filtrar por categoria">
           <button type="button" class="filter-btn" data-filter="all" aria-pressed="true">Todos <span
-              class="filter-count" data-count="all">49</span></button>
+              class="filter-count" data-count="all">53</span></button>
+          <button type="button" class="filter-btn" data-filter="kit" aria-pressed="false">Kit Agêntico <span
+              class="filter-count" data-count="kit">4</span></button>
           <button type="button" class="filter-btn" data-filter="css" aria-pressed="false">CSS <span
               class="filter-count" data-count="css">20</span></button>
           <button type="button" class="filter-btn" data-filter="html" aria-pressed="false">HTML <span
@@ -118,13 +122,33 @@
     <!-- Main Content -->
     <main id="main">
 
+      <!-- Kit Agêntico (Rules, Skills & Agents) -->
+      <section id="kit-agentico" class="snippets-section" aria-labelledby="title-kit">
+        <div class="container">
+          <div class="section-header">
+            <h2 class="section-title" id="title-kit">Kit Agêntico</h2>
+            <span class="section-count">4</span>
+            <a class="section-file" href="https://github.com/moouro/antigravity-config/tree/master/.agent"
+              target="_blank" rel="noopener">.agent/</a>
+          </div>
+          <div class="catalog">
+            <div class="catalog-head" aria-hidden="true">
+              <span>Gatilho</span>
+              <span>Recurso</span>
+              <span class="catalog-head-actions">Ações</span>
+            </div>
+            <div class="catalog-rows" id="kit-grid"></div>
+          </div>
+        </div>
+      </section>
+
       <!-- CSS Snippets -->
       <section id="snippets-css" class="snippets-section" aria-labelledby="title-css">
         <div class="container">
           <div class="section-header">
             <h2 class="section-title" id="title-css">CSS</h2>
             <span class="section-count">20</span>
-            <a class="section-file" href="https://github.com/moouro/antigravity-config/blob/main/snippets/css.json"
+            <a class="section-file" href="https://github.com/moouro/antigravity-config/blob/master/snippets/css.json"
               target="_blank" rel="noopener">snippets/css.json</a>
           </div>
           <div class="catalog">
@@ -144,7 +168,7 @@
           <div class="section-header">
             <h2 class="section-title" id="title-html">HTML</h2>
             <span class="section-count">12</span>
-            <a class="section-file" href="https://github.com/moouro/antigravity-config/blob/main/snippets/html.json"
+            <a class="section-file" href="https://github.com/moouro/antigravity-config/blob/master/snippets/html.json"
               target="_blank" rel="noopener">snippets/html.json</a>
           </div>
           <div class="catalog">
@@ -165,7 +189,7 @@
             <h2 class="section-title" id="title-js">JavaScript</h2>
             <span class="section-count">17</span>
             <a class="section-file"
-              href="https://github.com/moouro/antigravity-config/blob/main/snippets/javascript.json" target="_blank"
+              href="https://github.com/moouro/antigravity-config/blob/master/snippets/javascript.json" target="_blank"
               rel="noopener">snippets/javascript.json</a>
           </div>
           <div class="catalog">
@@ -180,27 +204,25 @@
       </section>
 
       <div class="no-results" id="no-results" hidden>
-        <p>Nenhum snippet encontrado para a sua busca.</p>
+        <p>Nenhum recurso encontrado para a sua busca.</p>
         <button type="button" class="no-results-reset" id="no-results-reset">Limpar busca e filtros</button>
       </div>
 
-      <!-- Por que isso existe? -->
+      <!-- Sobre / Proposta -->
       <section id="por-que" class="origin-section">
         <div class="container">
-          <p class="eyebrow">Origem</p>
+          <p class="eyebrow">Proposta</p>
           <div class="origin-content">
-            <h2 class="section-title">Por que esse projeto existe?</h2>
-            <p>Se você usa o Google Antigravity, sabe que ele <strong>não tem Settings Sync</strong>. Formata a máquina?
-              Troca de computador? Lá se vão todos os seus snippets, keybindings e configurações do editor.</p>
-            <p>O <strong>antigravity-config</strong> nasceu da minha frustração com isso. Eu queria uma forma simples de
-              carregar meus snippets e configs em qualquer setup novo — sem precisar reconfigurar tudo do zero, sem
-              copiar arquivo por arquivo.</p>
-            <p>A solução foi colocar tudo num <strong>repositório Git</strong>: 49 snippets de CSS, HTML e JavaScript
-              que eu uso no dia a dia, mais um script que restaura tudo com um único comando. Clona, roda o script, e
-              pronto — seu editor tá configurado.</p>
-            <p>Cada snippet foi pensado para ser simples de integrar, fácil de adaptar e seguir boas práticas.
-              Decidi abrir o projeto porque pode ser útil pra mais gente. Mesmo que você não use todos os snippets,
-              pode clonar o repo e <strong>adaptar à sua forma de trabalhar</strong>.</p>
+            <h2 class="section-title">Por que esse kit existe?</h2>
+            <p>Usar agentes de IA no front-end acelerou muito a escrita de código, mas trouxe um efeito colateral óbvio:
+              interfaces com <strong>cara genérica de template</strong> — gradientes roxos gratuitos, div soup,
+              contraste falhando e dezenas de media queries rígidas.</p>
+            <p>O <strong>Antigravity Front-End Kit</strong> reúne as diretrizes que eu realmente uso no dia a dia:
+              regras globais, uma skill de direção de arte autoral e um agente revisor de UI, somados a 49 snippets de
+              referência rápida em <strong>Intrinsic CSS, acessibilidade WCAG, HTML semântico e JavaScript</strong>.</p>
+            <p>Você não precisa sobrescrever o seu editor inteiro para testar. Cada Rule, Skill, Agent ou snippet pode
+              ser <strong>copiado em 1 clique</strong> direto deste catálogo — ou, se preferir versionar tudo em Git,
+              basta clonar o repositório e rodar o script de restauração.</p>
             <p class="origin-author">— <a href="https://mouro.dev" target="_blank" rel="noopener">mouro.dev</a></p>
           </div>
         </div>
@@ -210,9 +232,9 @@
       <section id="install" class="install-section">
         <div class="container">
           <div class="section-header">
-            <h2 class="section-title">Instalação</h2>
+            <h2 class="section-title">Como usar</h2>
           </div>
-          <p class="section-desc">Três passos, direto do terminal.</p>
+          <p class="section-desc">Copie arquivos individuais do catálogo acima ou instale o kit completo pelo terminal.</p>
 
           <ol class="install-steps">
             <li class="install-step">
@@ -234,7 +256,7 @@ cd antigravity-config</code></pre>
             <li class="install-step">
               <div class="step-head">
                 <span class="step-num">02</span>
-                <h3 class="step-title">Restaure as configs</h3>
+                <h3 class="step-title">Restaure snippets e settings</h3>
               </div>
               <div class="code-block">
                 <div class="code-block-head">
@@ -247,17 +269,17 @@ cd antigravity-config</code></pre>
                 </div>
                 <pre><code id="install-os-code">.\scripts\restore.ps1</code></pre>
               </div>
-              <p class="step-desc">Faz backup automático das configs atuais.</p>
+              <p class="step-desc">Detecta o diretório do Antigravity IDE e salva backup automático em <code>.backup/</code>.</p>
             </li>
 
             <li class="install-step">
               <div class="step-head">
                 <span class="step-num">03</span>
-                <h3 class="step-title">Use no editor</h3>
+                <h3 class="step-title">Ative o Kit Agêntico</h3>
               </div>
               <p class="step-desc">
-                Digite o prefixo (ex: <code>grid</code>, <code>fetch</code>) e
-                pressione <kbd>Tab</kbd> no seu editor.
+                Copie a pasta <code>.agent/</code> para a raiz do seu projeto (ou copie cada arquivo do catálogo) e use
+                <code>/autoral-ui</code>, <code>@ui-reviewer</code> ou qualquer prefixo + <kbd>Tab</kbd>.
               </p>
             </li>
           </ol>
@@ -269,8 +291,8 @@ cd antigravity-config</code></pre>
     <footer class="footer">
       <div class="container footer-inner">
         <div>
-          &copy; 2026 <strong>Antigravity Snippets</strong>. Design e desenvolvimento por <a href="https://mouro.dev"
-            target="_blank" rel="noopener">mouro.dev</a>
+          &copy; 2026 <strong>Antigravity Front-End Kit</strong>. Design e desenvolvimento por <a
+            href="https://mouro.dev" target="_blank" rel="noopener">mouro.dev</a>
         </div>
         <a href="https://github.com/moouro/antigravity-config" target="_blank" rel="noopener">Ver código no GitHub</a>
       </div>

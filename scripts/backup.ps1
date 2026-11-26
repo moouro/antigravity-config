@@ -14,7 +14,14 @@ if (-not $env:APPDATA -or -not (Test-Path $env:APPDATA)) {
     exit 1
 }
 
-$ANTIGRAVITY_DIR = Join-Path $env:APPDATA "Antigravity\User"
+# Detectar diretorio do Antigravity (2.0+ "Antigravity IDE" ou legado "Antigravity")
+$candidateIde = Join-Path $env:APPDATA "Antigravity IDE\User"
+$candidateLegacy = Join-Path $env:APPDATA "Antigravity\User"
+if (Test-Path $candidateIde) {
+    $ANTIGRAVITY_DIR = $candidateIde
+} else {
+    $ANTIGRAVITY_DIR = $candidateLegacy
+}
 
 # Validar que o caminho é realmente dentro de APPDATA (segurança)
 $resolvedPath = (Resolve-Path $env:APPDATA).Path

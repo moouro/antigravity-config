@@ -9,19 +9,25 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 REPO_DIR="$(dirname "$SCRIPT_DIR")"
 
-# Detectar SO e definir caminho
+# Detectar SO e definir caminho (2.0+ "Antigravity IDE" ou legado "Antigravity")
 case "$(uname -s)" in
     Darwin)
-        ANTIGRAVITY_DIR="$HOME/Library/Application Support/Antigravity/User"
+        BASE_DIR="$HOME/Library/Application Support"
         ;;
     Linux)
-        ANTIGRAVITY_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/Antigravity/User"
+        BASE_DIR="${XDG_CONFIG_HOME:-$HOME/.config}"
         ;;
     *)
         echo "ERRO: SO nao suportado ($(uname -s)). Use backup.ps1 no Windows."
         exit 1
         ;;
 esac
+
+if [ -d "$BASE_DIR/Antigravity IDE/User" ]; then
+    ANTIGRAVITY_DIR="$BASE_DIR/Antigravity IDE/User"
+else
+    ANTIGRAVITY_DIR="$BASE_DIR/Antigravity/User"
+fi
 
 # Validar que HOME existe e não está vazio
 if [ -z "${HOME:-}" ] || [ ! -d "$HOME" ]; then

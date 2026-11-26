@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Sincroniza snippets/*.json e docs/snippets-meta.json -> docs/snippets-data.js."""
+"""Sincroniza .agent/**/*, snippets/*.json e docs/snippets-meta.json -> docs/snippets-data.js."""
 
 from __future__ import annotations
 
@@ -9,7 +9,6 @@ import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-SNIPPETS_DIR = ROOT / "snippets"
 META_PATH = ROOT / "docs" / "snippets-meta.json"
 OUT_PATH = ROOT / "docs" / "snippets-data.js"
 
@@ -19,9 +18,17 @@ CATEGORIES = [
     ("js", "JavaScript", "snippets/javascript.json"),
 ]
 
+AGENT_KIT_SPECS = [
+    ("rule", "Rule", ".agent/rules/global-standards.md", "Global Standards", "alwaysApply"),
+    ("skill", "Skill", ".agent/skills/autoral-ui/SKILL.md", "Autoral UI", "/autoral-ui"),
+    ("skill", "Skill", ".agent/skills/anti-ai-writing/SKILL.md", "Anti-AI Writing", "/anti-ai-writing"),
+    ("agent", "Agent", ".agent/agents/ui-reviewer.md", "UI Reviewer", "@ui-reviewer"),
+]
+
 MARK_RE = re.compile(r"(<mark\b[^>]*>.*?</mark>)", re.S)
 CSS_COMMENT_RE = re.compile(r"/\*.*?\*/", re.S)
 JS_COMMENT_RE = re.compile(r"(?<![:'\"/])//[^\n]*")
+FRONTMATTER_RE = re.compile(r"\A---\s*\n(.*?)\n---\s*\n?", re.S)
 
 
 def _parse_region(
@@ -62,13 +69,11 @@ def _parse_region(
         if ch == "$":
             if pos + 1 < n and text[pos + 1] == "{":
                 inner_start = pos + 2
-                # ${N} (tabstop sem default)
                 m_simple = re.match(r"(\d+)\}", text[inner_start:])
                 if m_simple:
                     pos = inner_start + m_simple.end()
                     continue
 
-                # ${N:default}
                 m_default = re.match(r"(\d+):", text[inner_start:])
                 if m_default:
                     c_val, _, next_pos = _parse_region(
@@ -87,7 +92,6 @@ def _parse_region(
                     pos = next_pos
                     continue
 
-                # ${N|opt1,opt2,...|}
                 m_choice = re.match(r"(\d+)\|([^|]*)\|\}", text[inner_start:])
                 if m_choice:
                     opts = [o.strip() for o in m_choice.group(2).split(",") if o != ""]
@@ -105,7 +109,6 @@ def _parse_region(
                     pos = inner_start + m_choice.end()
                     continue
 
-                # ${VAR} (ex: ${CURRENT_YEAR})
                 m_var = re.match(r"([A-Z_][A-Z0-9_]*)\}", text[inner_start:])
                 if m_var:
                     lit_var = f"${{{m_var.group(1)}}}"
@@ -118,13 +121,11 @@ def _parse_region(
                     pos = inner_start + m_var.end()
                     continue
 
-            # $0, $1 .. $99
             m_num = re.match(r"\$(\d+)", text[pos:])
             if m_num:
                 pos += m_num.end()
                 continue
 
-            # $VAR
             m_var_plain = re.match(r"\$([A-Z_][A-Z0-9_]*)", text[pos:])
             if m_var_plain:
                 lit_var = m_var_plain.group(0)
@@ -171,7 +172,6 @@ def format_body(raw_body: str | list[str], lang: str) -> tuple[str, str, int]:
     raw = raw.replace("\r\n", "\n").replace("\t", "  ")
     code, code_html, _ = _parse_region(raw, 0, stop_at_brace=False, top_level=True)
 
-    # Remove linhas finais vazias causadas por um $0 isolado na última linha
     code_lines = code.split("\n")
     html_lines = code_html.split("\n")
     while code_lines and code_lines[-1].strip() == "":
@@ -183,6 +183,72 @@ def format_body(raw_body: str | list[str], lang: str) -> tuple[str, str, int]:
     clean_html = _highlight_comments("\n".join(html_lines), lang)
     line_count = len(code_lines) if clean_code else 0
     return clean_code, clean_html, line_count
+
+
+def _parse_frontmatter(raw_md: str) -> dict[str, str]:
+    m = FRONTMATTER_RE.match(raw_md)
+    if not m:
+        return {}
+    meta: dict[str, str] = {}
+    for line in m.group(1).splitlines():
+        if ":" in line:
+            k, v = line.split(":", 1)
+            meta[k.strip()] = v.strip().strip("\"'")
+    return meta
+
+
+def _format_markdown_preview(raw_md: str) -> str:
+    lines = raw_md.replace("\r\n", "\n").rstrip("\n").split("\n")
+    out: list[str] = []
+    in_fm = False
+    for idx, line in enumerate(lines):
+        esc = html.escape(line, quote=False)
+        if idx == 0 and line.strip() == "---":
+            in_fm = True
+            out.append(f'<span class="cm">{esc}</span>')
+            continue
+        if in_fm and line.strip() == "---":
+            in_fm = False
+            out.append(f'<span class="cm">{esc}</span>')
+            continue
+        if in_fm and ":" in line:
+            k, v = line.split(":", 1)
+            out.append(
+                f'<span class="md-key">{html.escape(k, quote=False)}</span>:'
+                f"{html.escape(v, quote=False)}"
+            )
+            continue
+        if line.startswith("#"):
+            out.append(f'<span class="md-head">{esc}</span>')
+            continue
+        out.append(esc)
+    return "\n".join(out)
+
+
+def build_agent_kit() -> list[dict]:
+    kit_items: list[dict] = []
+    for kind, kind_label, rel_path, display_name, trigger in AGENT_KIT_SPECS:
+        src = ROOT / rel_path
+        if not src.exists():
+            continue
+        raw = src.read_text(encoding="utf-8").replace("\r\n", "\n").rstrip("\n")
+        fm = _parse_frontmatter(raw)
+        lines = len(raw.split("\n")) if raw else 0
+        kit_items.append(
+            {
+                "id": src.parent.name if src.name == "SKILL.md" else src.stem,
+                "kind": kind,
+                "kindLabel": kind_label,
+                "name": display_name,
+                "trigger": trigger,
+                "path": rel_path,
+                "description": fm.get("description", ""),
+                "code": raw + "\n",
+                "codeHtml": _format_markdown_preview(raw),
+                "lines": lines,
+            }
+        )
+    return kit_items
 
 
 def _fallback_name(raw_key: str) -> str:
@@ -240,22 +306,27 @@ def build_data() -> dict:
             }
         )
 
-    return {"categories": categories_out}
+    return {"kit": build_agent_kit(), "categories": categories_out}
 
 
 def main() -> None:
     data = build_data()
     banner = (
         "// Arquivo gerado automaticamente por scripts/sync-docs.py "
-        "a partir de snippets/*.json\n"
+        "a partir de .agent/**/* e snippets/*.json\n"
     )
     payload = json.dumps(data, ensure_ascii=False, indent=2)
     OUT_PATH.write_text(
         f"{banner}window.ANTIGRAVITY_SNIPPETS = {payload};\n", encoding="utf-8"
     )
-    counts = " / ".join(f"{len(c['items'])} {c['id'].upper()}" for c in data["categories"])
-    total = sum(len(c["items"]) for c in data["categories"])
-    print(f"OK: {OUT_PATH.relative_to(ROOT)} ({counts} / {total} total)")
+    kit_count = len(data["kit"])
+    counts = " / ".join(
+        f"{len(c['items'])} {c['id'].upper()}" for c in data["categories"]
+    )
+    total = kit_count + sum(len(c["items"]) for c in data["categories"])
+    print(
+        f"OK: {OUT_PATH.relative_to(ROOT)} ({kit_count} KIT / {counts} / {total} total)"
+    )
 
 
 if __name__ == "__main__":

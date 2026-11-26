@@ -1,5 +1,5 @@
 /* =============================================
-   ANTIGRAVITY SNIPPETS — Script
+   ANTIGRAVITY FRONT-END KIT — Script
    Dados gerados em docs/snippets-data.js via scripts/sync-docs.py
    ============================================= */
 
@@ -30,6 +30,89 @@ function announce(message) {
 }
 
 // ---------- Card Rendering ----------
+
+function createKitCard(item, index) {
+	const card = document.createElement("div");
+	card.className = "snippet-card";
+	card.dataset.name = item.name.toLowerCase();
+	card.dataset.prefix = item.trigger.toLowerCase();
+	card.dataset.desc = item.description.toLowerCase();
+	card.dataset.explain = `${item.path} ${item.kindLabel}`.toLowerCase();
+	card.dataset.lang = "kit";
+	card.dataset.tag = item.kind.toLowerCase();
+
+	const bodyId = `kit-${item.id}-${index}`;
+	const lineLabel = item.lines === 1 ? "linha" : "linhas";
+
+	card.innerHTML = `
+    <button type="button" class="card-header" aria-expanded="false" aria-controls="${bodyId}" aria-label="Expandir ${item.kindLabel} ${item.name}">
+      <span class="card-prefix">${item.trigger}</span>
+      <span class="card-info">
+        <span class="card-title-row">
+          <span class="card-name">${item.name}</span>
+          <span class="card-tag">${item.kindLabel}</span>
+        </span>
+        <span class="card-desc">${item.description}</span>
+      </span>
+      <span class="card-toggle">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+      </span>
+    </button>
+    <button type="button" class="row-copy" aria-label="Copiar arquivo ${item.path}" title="Copiar arquivo">
+      <svg class="icon-copy" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></svg>
+      <svg class="icon-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+    </button>
+    <div class="card-body" id="${bodyId}">
+      <div class="card-body-inner">
+        <div class="card-explanation">
+          <div class="kit-dest">
+            <span class="usage-label">Destino</span>
+            <code>${item.path}</code>
+          </div>
+          <div class="snippet-code">
+            <div class="snippet-code-head">
+              <span class="snippet-code-meta">markdown · ${item.lines} ${lineLabel}</span>
+              <button type="button" class="copy-btn snippet-copy-code" aria-label="Copiar conteúdo de ${item.path}">Copiar arquivo</button>
+            </div>
+            <pre><code>${item.codeHtml}</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+	const header = card.querySelector(".card-header");
+	header.addEventListener("click", () => toggleCard(card));
+
+	// Botão na linha copia o arquivo inteiro em 1 clique
+	const rowCopyBtn = card.querySelector(".row-copy");
+	let rowTimer;
+	rowCopyBtn.addEventListener("click", async () => {
+		await copyText(item.code);
+		announce(`Arquivo ${item.path} copiado`);
+		rowCopyBtn.classList.add("copied");
+		clearTimeout(rowTimer);
+		rowTimer = setTimeout(() => rowCopyBtn.classList.remove("copied"), 1500);
+	});
+
+	// Botão dentro do bloco expandido também copia o arquivo inteiro
+	const copyCodeBtn = card.querySelector(".snippet-copy-code");
+	const originalLabel = copyCodeBtn.textContent;
+	let codeTimer;
+	copyCodeBtn.addEventListener("click", async () => {
+		await copyText(item.code);
+		announce(`Arquivo ${item.path} copiado`);
+		copyCodeBtn.textContent = "Copiado";
+		copyCodeBtn.classList.add("copied");
+		clearTimeout(codeTimer);
+		codeTimer = setTimeout(() => {
+			copyCodeBtn.textContent = originalLabel;
+			copyCodeBtn.classList.remove("copied");
+		}, 1800);
+	});
+
+	return card;
+}
 
 function createSnippetCard(snippet, category, index) {
 	const card = document.createElement("div");
@@ -133,7 +216,10 @@ function toggleCard(card) {
 // ---------- Init Rendering ----------
 
 function renderAll() {
-	const categories = window.ANTIGRAVITY_SNIPPETS?.categories || [];
+	const data = window.ANTIGRAVITY_SNIPPETS || {};
+	const kitItems = data.kit || [];
+	const categories = data.categories || [];
+	const kitGrid = document.getElementById("kit-grid");
 	const grids = {
 		css: document.getElementById("css-grid"),
 		html: document.getElementById("html-grid"),
@@ -142,6 +228,21 @@ function renderAll() {
 
 	let total = 0;
 	let a11yCount = 0;
+
+	if (kitGrid) {
+		kitItems.forEach((item, index) => {
+			kitGrid.appendChild(createKitCard(item, index));
+		});
+		total += kitItems.length;
+
+		const kitBadge = document.querySelector('[data-count="kit"]');
+		if (kitBadge) kitBadge.textContent = kitItems.length;
+
+		const kitSectionCount = kitGrid
+			.closest(".snippets-section")
+			?.querySelector(".section-count");
+		if (kitSectionCount) kitSectionCount.textContent = kitItems.length;
+	}
 
 	categories.forEach((cat) => {
 		const grid = grids[cat.id];
@@ -164,7 +265,7 @@ function renderAll() {
 	});
 
 	const totalLabel = document.querySelector("[data-total-label]");
-	if (totalLabel) totalLabel.textContent = `${total} snippets`;
+	if (totalLabel) totalLabel.textContent = `${total} recursos`;
 
 	const allCount = document.querySelector('[data-count="all"]');
 	if (allCount) allCount.textContent = total;
@@ -177,7 +278,7 @@ function renderAll() {
 
 // ---------- Search / Filter ----------
 
-function initSearchAndFilters(totalSnippets) {
+function initSearchAndFilters(totalItems) {
 	const input = document.getElementById("search-input");
 	const searchBox = input.closest(".search-box");
 	const clearBtn = document.getElementById("search-clear");
@@ -241,7 +342,7 @@ function initSearchAndFilters(totalSnippets) {
 		const isFiltered = Boolean(query) || activeFilter !== "all";
 		resultsBar.hidden = !isFiltered;
 		if (isFiltered) {
-			resultsText.textContent = `${totalVisible} de ${totalSnippets} snippets`;
+			resultsText.textContent = `${totalVisible} de ${totalItems} recursos`;
 		}
 	}
 
@@ -278,21 +379,24 @@ function initSearchAndFilters(totalSnippets) {
 	resultsReset.addEventListener("click", resetAll);
 	noResultsReset.addEventListener("click", resetAll);
 
-	// Links de categoria na navbar limpam o filtro se ele esconder a seção alvo
+	// Links de seção na navbar limpam o filtro se ele esconder a seção alvo
 	const anchorLangs = {
+		"#kit-agentico": "kit",
 		"#snippets-css": "css",
 		"#snippets-html": "html",
 		"#snippets-js": "js",
 	};
-	document.querySelectorAll(".nav-link[href^='#snippets-']").forEach((link) => {
-		link.addEventListener("click", () => {
-			const targetLang = anchorLangs[link.getAttribute("href")];
-			if (activeFilter !== "all" && activeFilter !== targetLang) {
-				activeFilter = "all";
-				applyFilters();
-			}
+	document
+		.querySelectorAll(".nav-link[href^='#snippets-'], .nav-link[href='#kit-agentico']")
+		.forEach((link) => {
+			link.addEventListener("click", () => {
+				const targetLang = anchorLangs[link.getAttribute("href")];
+				if (activeFilter !== "all" && activeFilter !== targetLang) {
+					activeFilter = "all";
+					applyFilters();
+				}
+			});
 		});
-	});
 
 	// Ctrl+K shortcut
 	document.addEventListener("keydown", (e) => {
@@ -317,7 +421,6 @@ function initNavbar() {
 		toggle.setAttribute("aria-label", "Abrir menu");
 	}
 
-	// Scroll effect
 	window.addEventListener(
 		"scroll",
 		() => {
@@ -326,19 +429,16 @@ function initNavbar() {
 		{ passive: true },
 	);
 
-	// Mobile toggle
 	toggle.addEventListener("click", () => {
 		const isOpen = links.classList.toggle("open");
 		toggle.setAttribute("aria-expanded", String(isOpen));
 		toggle.setAttribute("aria-label", isOpen ? "Fechar menu" : "Abrir menu");
 	});
 
-	// Close on link click (mobile)
 	links.querySelectorAll(".nav-link").forEach((link) => {
 		link.addEventListener("click", closeMenu);
 	});
 
-	// Close on Escape
 	document.addEventListener("keydown", (e) => {
 		if (e.key === "Escape" && links.classList.contains("open")) {
 			closeMenu();
